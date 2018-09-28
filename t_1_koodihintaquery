@@ -1,0 +1,15 @@
+SELECT bg.tst_tuote.koodi, bg.tst_ostohinta.hinta FROM bg.tst_tuote
+INNER JOIN bg.tst_toimittajatuote
+ON bg.tst_toimittajatuote.tuote = bg.tst_tuote.tuote
+INNER JOIN bg.tst_ostohinta
+ON bg.tst_ostohinta.toimittajatuote = bg.tst_toimittajatuote.toimittajatuote
+WHERE bg.tst_tuote.tuote IN (SELECT DISTINCT ON(bg.tst_ostohinta.toimittajatuote) bg.tst_toimittajatuote.tuote FROM bg.tst_toimittajatuote
+INNER JOIN bg.tst_ostohinta
+ON bg.tst_toimittajatuote.toimittajatuote = bg.tst_ostohinta.toimittajatuote
+WHERE bg.tst_toimittajatuote.oletustoimittaja = true AND bg.tst_toimittajatuote.toimittajatuote IN (SELECT toimittajatuote FROM bg.tst_ostohinta WHERE pvm <= CURRENT_DATE)
+ORDER BY bg.tst_ostohinta.toimittajatuote, pvm DESC)
+
+/* Query muodostuu 3:sta erillisestä kyselystä. Ensimmäinen kysely suoritetaan tst_ostohinta
+   Tauluun. Taulusta etsitään päivämäärän perusteella uusin toimittajatuote. Tämän jälkeen suoritetaan kysely tst_toimittajatuote tauluun ja etsitään tuote sarake
+   edellisen queryn tulosten perusteella. Lopuksi suoritetaan kysely tst_tuote tauluun ja etsitään koodi taulusta kahden ensimmäisen queryn
+   tulosten perusteella. */

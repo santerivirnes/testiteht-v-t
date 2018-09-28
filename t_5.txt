@@ -1,0 +1,14 @@
+https://www.theworldsworstwebsiteever.com/
+
+Asettelu on vasemmassalaidassa.
+Itse asettelisin divit keskelle sivua, jotta lukeminen olisi helpompaa.
+
+Käyttäisin vähemmän värejä. Nämä värit ovat silmään pistäviä ja aiheuttavat päänsärkyä.
+
+Poistaisin kaikki vilkkuvat kuvat. Nämä aiheuttavat myös käyttäjälle päänsärkyä.
+
+Navigaation tulisi olla selkeä ja helppo käyttöinen.
+
+Fontteja tulisikäyttää vähemmän. Maksimissaan kolme erillaista fonttia.
+
+

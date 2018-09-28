@@ -1,0 +1,26 @@
+<p id="add1"></p>
+<p id="add2"></p>
+<p id="print"></p>
+<script>
+function add(x,y){
+	var ddd = function (y){return x+y};
+    if(typeof y =='undefined'){
+    	return ddd;
+    }else{
+    	return ddd(y);
+    }
+}
+function doubleAdder(x, y){
+	return add(x)(y) + add(x,y)
+}
+
+document.getElementById("add1").innerHTML = add(4, 6);
+document.getElementById("add2").innerHTML = add(4)(6);
+document.getElementById("print").innerHTML = doubleAdder(4,6) 
+
+// En voi kommentoida tehtävää tätä paremmin:
+// Muutamalla google haulla löysin esimerkin kuinka toteutetaan haluama syntaxi
+// Ilmeisesti tämä on mahdollista javascriptissä
+
+</script>
+</p>

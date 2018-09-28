@@ -1,0 +1,89 @@
+<!doctype html>
+<html>
+    <head>
+	<meta charset="utf-8">
+
+	<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+	<!-- Bootstrap hoitaa tyylittelyt tällä kertaa -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+    </head>
+    <body>
+    <div id="demo">
+
+    </div>
+	<script>
+	// muuttujat
+	var i,j,k,x = "";
+	
+	//haetaan malli1.json data
+	$.getJSON("malli1.json", function(json) {
+	//Jos status on 200 tehdään jotain.
+	if(json.status == 200){
+	    // Tulostetaan yksittäinen taulu jokaiselle array:n tiedolle
+	for(i in json.data.array){
+	    
+	    //Aloitetaan taulukon luominen
+	    x += "<table class='table-striped table table-bordered'><tr>";    
+	    // Ensimmäiseksi headeriksi CarId
+        x += "<th>CarId: " + json.data.array[i].carId + "</th></tr>";
+        // Seuraavalle riville headeriksi kbaNumbers
+        x += "<tr><th>kbaNumbers</th></tr>";
+        for(j in json.data.array[i].kbaNumbers.array){
+            // Printataan jokainen löytyvä numero headerin alle
+            x += "<tr><td>" + json.data.array[i].kbaNumbers.array[j].kbaNo + "</td></tr>";
+        }
+        // Tarkastetaan löytyykö motorCodeja
+        if(json.data.array[i].motorCodes !== ""){
+        // Jos löytyy asetetaan header
+        x += "<tr><th>motorCodes</th></tr>";
+        // Tulostetaan koodi
+        x += "<tr><td>" + json.data.array[i].motorCodes + "</td></tr>";
+        }
+        // Tarkastetaan löytyykö prototypejä
+        if(typeof json.data.array[i].protoTypes !== "undefined"){
+            // Jos löytyy niin asetetaan header
+        x += "<tr><th>protoTypes</th></tr>";
+        for(k in json.data.array[i].protoTypes.array){
+            // tulostetaan jokainen prototype
+            x += "<tr><td>" + json.data.array[i].protoTypes.array[k].prototype + "</td></tr>";
+        }
+        }
+        // Lopuksi tulostetaan jokainen vehicleDetail
+        x += "<tr><th>vehicleDetails</th></tr>"
+        x += "<tr><th>carId: </th><th>" + json.data.array[i].vehicleDetails.carId + "</th></tr>"
+          +  "<tr><th>ccmTech: </th><th>" + json.data.array[i].vehicleDetails.ccmTech + "</th></tr>"
+          +  "<tr><th>constructionType: </th><th>" + json.data.array[i].vehicleDetails.constructionType + "</th></tr>"
+          +  "<tr><th>constructionType2: </th><th>" + json.data.array[i].vehicleDetails.constructionType2 + "</th></tr>"
+          +  "<tr><th>cylinder: </th><th>" + json.data.array[i].vehicleDetails.cylinder + "</th></tr>"
+          +  "<tr><th>cylinderCapacityCcm: </th><th>" + json.data.array[i].vehicleDetails.cylinderCapacityCcm + "</th></tr>"
+          +  "<tr><th>cylinderCapacityLiter: </th><th>" + json.data.array[i].vehicleDetails.cylinderCapacityLiter + "</th></tr>"
+          +  "<tr><th>fuelType: </th><th>" + json.data.array[i].vehicleDetails.fuelType + "</th></tr>"
+          +  "<tr><th>fuelTypeProcess: </th><th>" + json.data.array[i].vehicleDetails.fuelTypeProcess + "</th></tr>"
+          +  "<tr><th>impulsionType: </th><th>" + json.data.array[i].vehicleDetails.impulsionType + "</th></tr>"
+          +  "<tr><th>manuId: </th><th>" + json.data.array[i].vehicleDetails.manuId + "</th></tr>"
+          +  "<tr><th>manuName: </th><th>" + json.data.array[i].vehicleDetails.manuName + "</th></tr>"
+          +  "<tr><th>modId: </th><th>" + json.data.array[i].vehicleDetails.modId + "</th></tr>"
+          +  "<tr><th>modelName: </th><th>" + json.data.array[i].vehicleDetails.modelName + "</th></tr>"
+          +  "<tr><th>motorType: </th><th>" + json.data.array[i].vehicleDetails.motorType + "</th></tr>"
+          +  "<tr><th>powerHpFrom: </th><th>" + json.data.array[i].vehicleDetails.powerHpFrom + "</th></tr>"
+          +  "<tr><th>powerHpTo: </th><th>" + json.data.array[i].vehicleDetails.powerHpTo + "</th></tr>"
+          +  "<tr><th>powerKwFrom: </th><th>" + json.data.array[i].vehicleDetails.powerKwFrom + "</th></tr>"
+          +  "<tr><th>powerKwTo: </th><th>" + json.data.array[i].vehicleDetails.powerKwTo + "</th></tr>"
+          +  "<tr><th>typeName: </th><th>" + json.data.array[i].vehicleDetails.typeName + "</th></tr>"
+          +  "<tr><th>typeNumber: </th><th>" + json.data.array[i].vehicleDetails.typeNumber + "</th></tr>"
+          +  "<tr><th>valves: </th><th>" + json.data.array[i].vehicleDetails.valves + "</th></tr>"
+          +  "<tr><th>yearOfConstrFrom: </th><th>" + json.data.array[i].vehicleDetails.yearOfConstrFrom + "</th></tr>"
+          +  "<tr><th>yearOfConstrTo: </th><th>" + json.data.array[i].vehicleDetails.yearOfConstrTo + "</th></tr>";
+          // Taulu kiinni jotta uuden taulun tulostaminen voi alkaa
+        x += "</table>";
+	}
+	}
+    // Printataan taulukko demo ID:llä olevaan diviin
+    document.getElementById("demo").innerHTML = x;
+	});
+    
+	</script>
+    </body>
+</html>
